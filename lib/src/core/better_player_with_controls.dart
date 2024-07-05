@@ -122,8 +122,7 @@ class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
     }
     _initialized = true;
 
-    final bool placeholderOnTop =
-        betterPlayerController.betterPlayerConfiguration.placeholderOnTop;
+    final bool placeholderOnTop = betterPlayerController.betterPlayerConfiguration.placeholderOnTop;
     // ignore: avoid_unnecessary_containers
     return Container(
       child: Stack(

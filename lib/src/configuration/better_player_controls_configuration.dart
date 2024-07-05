@@ -15,6 +15,10 @@ class BetterPlayerControlsConfiguration {
   final Color textColortitle;
 
   final String textTitle;
+  
+  final String textHint;
+
+  final String numberWatching;
 
   ///Color of icons
   final Color iconsColor;
@@ -41,6 +45,8 @@ class BetterPlayerControlsConfiguration {
   final IconData skipBackIcon;
 
   final IconData backIcon;
+  
+  final IconData eyeWatchingIcon;
 
   final IconData hideChatIcon;
 
@@ -233,7 +239,10 @@ class BetterPlayerControlsConfiguration {
     this.textTitle = '',
     this.backIcon = Icons.arrow_back_ios_outlined,
     this.hideChatIcon = Icons.hide_image,
-    this.showChatIcon = Icons.shower
+    this.showChatIcon = Icons.image,
+    this.numberWatching = '',
+    this.textHint = '',
+    this.eyeWatchingIcon = Icons.remove_red_eye
   });
 
   factory BetterPlayerControlsConfiguration.white() {

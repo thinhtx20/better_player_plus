@@ -69,7 +69,7 @@ class _BetterPlayerCupertinoControlsState extends BetterPlayerControlsState<Bett
         buttonPadding,
       ),
       if (_wasLoading) Expanded(child: Center(child: _buildLoadingWidget())) else _buildHitArea(),
-      _buildNextVideoWidget(),
+      // _buildNextVideoWidget(),
       _buildBottomBar(
         backgroundColor,
         iconColor,
@@ -95,9 +95,9 @@ class _BetterPlayerCupertinoControlsState extends BetterPlayerControlsState<Bett
           BetterPlayerMultipleGestureDetector.of(context)!.onLongPress?.call();
         }
       },
-      child:  isFullScreen ?  Row(children: [
-        Expanded(child: AbsorbPointer(absorbing: controlsNotVisible, child: controlsColumn)),
-        _betterPlayerController!.isHidechart ? Container(height: MediaQuery.of(context).size.height,width: MediaQuery.of(context).size.width * 0.25,color: Colors.transparent,child: _controlsConfiguration.customControlschat,): SizedBox()
+      child:  isFullScreen ?  Stack(children: [
+        _betterPlayerController!.isHidechart ? Positioned(right: 40, child: Container(height: MediaQuery.of(context).size.height,width: MediaQuery.of(context).size.width * 0.25,color: Colors.transparent,child: _controlsConfiguration.customControlschat,)): SizedBox(),
+        AbsorbPointer(absorbing: controlsNotVisible, child: controlsColumn),
       ]) : controlsColumn,
     );
   }
@@ -396,20 +396,43 @@ class _BetterPlayerCupertinoControlsState extends BetterPlayerControlsState<Bett
           padding: const EdgeInsets.only(right: 12.0),
           child: Row(
             children: [
-              Text(
-                '• ',
-                style: TextStyle(
+              Container(
+                decoration: BoxDecoration(
                   color: Colors.red,
-                  fontSize: 12.0,
+                  borderRadius: BorderRadius.all(Radius.circular(4.0)),
                 ),
-              ),
-              Text(
-                'LIVE',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 12.0,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                Text(
+                  '• ',
+                  style: TextStyle(
+                    color: _controlsConfiguration.textColor,
+                    fontSize: 12.0,
+                  ),
                 ),
-              )
+                Text(
+                  'LIVE',
+                  style: TextStyle(
+                    color: _controlsConfiguration.textColor,
+                    fontSize: 12.0,
+                  ),
+                ),
+                    SizedBox(width: 5,),
+              ],),),
+              SizedBox(width: 5,),
+              Row(children: [
+                Icon(_controlsConfiguration.eyeWatchingIcon,color: _controlsConfiguration.textColor,),
+                SizedBox(width: 5,),
+                Text(
+                  '${_controlsConfiguration.numberWatching}',
+                  style: TextStyle(
+                    color: _controlsConfiguration.textColor,
+                    fontSize: 12.0,
+                  ),
+                )
+              ],),
             ],
           ),
         ));
@@ -522,20 +545,20 @@ class _BetterPlayerCupertinoControlsState extends BetterPlayerControlsState<Bett
           children: <Widget>[
             if (_controlsConfiguration.enableTittle) _buildTittle(iconColor, barHeight) else const SizedBox(),
             const Spacer(),
-            const SizedBox(
-              width: 4,
-            ),
-            if (_controlsConfiguration.enableOverflowMenu)
-              _buildMoreButton(
-                _controller,
-                backgroundColor,
-                iconColor,
-                barHeight,
-                iconSize,
-                buttonPadding,
-              )
-            else
-              const SizedBox(),
+            // const SizedBox(
+            //   width: 4,
+            // ),
+            // if (_controlsConfiguration.enableOverflowMenu)
+            //   _buildMoreButton(
+            //     _controller,
+            //     backgroundColor,
+            //     iconColor,
+            //     barHeight,
+            //     iconSize,
+            //     buttonPadding,
+            //   )
+            // else
+            //   const SizedBox(),
           ],
         ),
       ),
@@ -571,6 +594,7 @@ class _BetterPlayerCupertinoControlsState extends BetterPlayerControlsState<Bett
             ),
           );
         } else {
+          print('hsshhshshshhs ');
           return const SizedBox();
         }
       },
@@ -647,12 +671,12 @@ class _BetterPlayerCupertinoControlsState extends BetterPlayerControlsState<Bett
             padding: const EdgeInsets.only(right: 12.0),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.grey[700],
+                color: Colors.grey[600],
                 borderRadius: BorderRadius.all(Radius.circular(16.0)),
               ),
               child: Padding(
                 padding: EdgeInsets.all(6),
-                child: Text('Gửi một bình luận nhé.....',style: TextStyle(color: Colors.grey[400],fontSize: 10),maxLines: 1,),
+                child: Text('${_controlsConfiguration.textHint}',style: TextStyle(color: Colors.grey[200],fontSize: 10),maxLines: 1,),
               ),
             ),
           )),

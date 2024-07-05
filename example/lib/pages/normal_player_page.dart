@@ -14,20 +14,21 @@ class _NormalPlayerPageState extends State<NormalPlayerPage> {
 
   @override
   void initState() {
-    BetterPlayerConfiguration betterPlayerConfiguration =
-        BetterPlayerConfiguration(
+    BetterPlayerConfiguration betterPlayerConfiguration = BetterPlayerConfiguration(
       aspectRatio: 16 / 9,
       fit: BoxFit.contain,
       autoPlay: true,
-      looping: true,
-      deviceOrientationsAfterFullScreen: [
-        DeviceOrientation.portraitDown,
-        DeviceOrientation.portraitUp
-      ],
+      deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp],
+      controlsConfiguration: BetterPlayerControlsConfiguration(
+          textTitle: 'xin chao vn',
+        textColortitle: Colors.cyanAccent,
+          customControlschat: Container(color: Colors.red,),
+        numberWatching: '2000'
+      ),
     );
     _betterPlayerDataSource = BetterPlayerDataSource(
       BetterPlayerDataSourceType.network,
-      Constants.forBiggerBlazesUrl,
+      Constants.segmentedSubtitlesHlsUrl,
     );
     _betterPlayerController = BetterPlayerController(betterPlayerConfiguration);
     _betterPlayerController.setupDataSource(_betterPlayerDataSource);
@@ -40,14 +41,9 @@ class _NormalPlayerPageState extends State<NormalPlayerPage> {
       appBar: AppBar(
         title: Text("Normal player page"),
       ),
-      body: Column(
-        children: [
-          const SizedBox(height: 8),
-          AspectRatio(
-            aspectRatio: 16 / 9,
-            child: BetterPlayer(controller: _betterPlayerController),
-          ),
-        ],
+      body: AspectRatio(
+        aspectRatio: 16 / 9,
+        child: BetterPlayer(controller: _betterPlayerController),
       ),
     );
   }
